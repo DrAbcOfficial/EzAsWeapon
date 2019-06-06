@@ -13,13 +13,13 @@ A generator for Sven-Coop scripts weapons
 
 基于之前写的👉baseweapon.as
 
-依旧是菜鸡学习C井的垃圾作品
+依旧是菜鸡💩~学习~乱搞 C井的垃圾作品
 
 不过这个有BUG可以***维护***
 
 不知道什么是As脚🦶🏿本？
 
-: 戳[这里](https://github.com/baso88/SC_AngelScript/wiki)去看
+</i>戳[这里](https://github.com/baso88/SC_AngelScript/wiki)去看
 
 使用方法
 ----
@@ -47,6 +47,13 @@ A generator for Sven-Coop scripts weapons
 __不知道怎么在游戏里拿出自定义武器？最简单的👇__
 
 `打开控制台，输入sv_cheats 3, 再give weapon_balabalabala`
+
+
+----------
+
+#### Todo
+- [ ] 修BUG🔨
+
 ***
 
 👉[下载](https://github.com/DrAbcrealone/EzAsWeapon/releases)
