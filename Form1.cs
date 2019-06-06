@@ -451,10 +451,10 @@ namespace EZAsWeapon
                     AnimeOpBuffer(m_RELOAD, line.Replace("m_RELOAD=", "").Trim());
                 else if (line.IndexOf("m_DRAW") != -1)
                     AnimeOpBuffer(m_DRAW, line.Replace("m_DRAW=", "").Trim());
-                else if (line.IndexOf("m_SHOOT") != -1)
-                    AnimeOpBuffer(m_SHOOT, line.Replace("m_SHOOT=", "").Trim());
                 else if (line.IndexOf("m_SHOOT2") != -1)
                     AnimeOpBuffer(m_SHOOT2, line.Replace("m_SHOOT2=", "").Trim());
+                else if (line.IndexOf("m_SHOOT") != -1)
+                    AnimeOpBuffer(m_SHOOT, line.Replace("m_SHOOT=", "").Trim());
                 else if (line.IndexOf("m_START_RELOAD") != -1)
                     AnimeOpBuffer(m_START_RELOAD, line.Replace("m_START_RELOAD=", "").Trim());
                 else if (line.IndexOf("m_INSERT") != -1)
@@ -775,15 +775,30 @@ namespace EZAsWeapon
             form3.ShowDialog();
         }
 
-        private void ToolStripMenuItem2_Click(object sender, EventArgs e)
+        private void 关于ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            Utility.Dialog("打开关于界面....");
+            Form4 form4 = new Form4();
+            form4.ShowDialog();
+        }
+
+        private void Hlmp5ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Utility.Dialog("打开示例：hlmp5....");
             StringSpliter(OpenDefaultData.Exm9mm);
         }
 
-        private void 关于ToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void ToolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            Form4 form4 = new Form4();
-            form4.ShowDialog();
+            Utility.Dialog("启动Register管理器...");
+            Form5 from5 = new Form5();
+            from5.Show();
+        }
+
+        private void HlshotgunToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Utility.Dialog("打开示例：hlshotgun....");
+            StringSpliter(OpenDefaultData.ExmShotGun);
         }
     }
 }

@@ -431,6 +431,134 @@
             "	g_ItemRegistry.RegisterWeapon( 'weapon_hlmp5', 'hl_weapons', '9mm', 'ARgrenades' ,'ammo_9mmclip' , 'ammo_ARgrenades');\n" +
             "}\n";
 
+        public static string ExmShotGun =
+            "enum ShotgunAnimation\n" +
+            "{\n" +
+            "SHOTGUN_IDLE = 0,\n" +
+            "SHOTGUN_FIRE,\n" +
+            "SHOTGUN_FIRE2,\n" +
+            "SHOTGUN_RELOAD,\n" +
+            "SHOTGUN_PUMP,\n" +
+            "SHOTGUN_START_RELOAD,\n" +
+            "SHOTGUN_DRAW,\n" +
+            "SHOTGUN_HOLSTER,\n" +
+            "SHOTGUN_IDLE4,\n" +
+            "SHOTGUN_IDLE_DEEP\n" +
+            "};\n" +
+            "class weapon_hlshotgun : CustomWeapons::CBaseWeapon\n" +
+            "{\n" +
+            "weapon_hlshotgun()\n" +
+            "{\n" +
+            "m_IDLE = SHOTGUN_IDLE;\n" +
+            "m_FIDGET = SHOTGUN_IDLE_DEEP;\n" +
+            "m_RELOAD = 0;\n" +
+            "m_DRAW = SHOTGUN_DRAW;\n" +
+            "m_SHOOT = SHOTGUN_FIRE;\n" +
+            "m_SHOOT2= SHOTGUN_FIRE2;\n" +
+            "m_START_RELOAD= SHOTGUN_START_RELOAD;\n" +
+            "m_INSERT= SHOTGUN_RELOAD;\n" +
+            "m_AFTER_RELOAD= SHOTGUN_PUMP;\n" +
+            "\n" +
+            "m_VModel = 'models/hlclassic/v_shotgun.mdl';\n" +
+            "m_PModel = 'models/hlclassic/p_shotgun.mdl';\n" +
+            "m_WModel = 'models/hlclassic/w_shotgun.mdl';\n" +
+            "m_SModel = 'models/hlclassic/shotgunshell.mdl';\n" +
+            "\n" +
+            "m_strDryFireSound = 'hl/weapons/357_cock1.wav';\n" +
+            "m_FireSounds = 'hlclassic/weapons/sbarrel1.wav';\n" +
+            "\n" +
+            "m_strTextName = 'hl_weapons/weapon_hlshotgun.txt';\n" +
+            "\n" +
+            "m_strAnimeName = 'shotgun';\n" +
+            "\n" +
+            "m_iDefaultGive = 60;\n" +
+            "m_iMaxAmmoAmount = 125;\n" +
+            "m_iClipMax = 8;\n" +
+            "m_iClipDrop= 8;\n" +
+            "\n" +
+            "IsZoomMode= false;\n" +
+            "m_iZoomSpeed= 0;\n" +
+            "m_iZoomFOV= 0;\n" +
+            "m_ZoomSound= '';\n" +
+            "\n" +
+            "IsProj= false;\n" +
+            "pProjname= '';\n" +
+            "ProjOrgX= 0;\n" +
+            "ProjOrgY= 0;\n" +
+            "ProjOrgZ= 0;\n" +
+            "ProjOrgV= 0;\n" +
+            "\n" +
+            "IsSubProj= false;\n" +
+            "strSubProjName= '';\n" +
+            "SubProjOrgX= 0;\n" +
+            "SubProjOrgY= 0;\n" +
+            "SubProjOrgZ= 0;\n" +
+            "SubProjOrgV= 0;\n" +
+            "\n" +
+            "m_iSlotAmount = 2;\n" +
+            "m_iPositionAmount = 16;\n" +
+            "m_iWeightAmount = 7;\n" +
+            "m_iDamegeAmount = 14;\n" +
+            "FireAmount= 1;\n" +
+            "FireAmount2= 2;\n" +
+            "m_DeployTime = 0.24;\n" +
+            "m_FireTime = 0.85;\n" +
+            "m_ReloadTime = 0;\n" +
+            "\n" +
+            "m_XPunchMax = -8;\n" +
+            "m_XPunchMin = -5;\n" +
+            "m_YPunchMax = 0;\n" +
+            "m_YPunchMin = 0;\n" +
+            "\n" +
+            "m_iAcc = VECTOR_CONE_1DEGREES;\n" +
+            "m_iAcc2= VECTOR_CONE_4DEGREES;\n" +
+            "\n" +
+            "IsSecFire= true;\n" +
+            "m_iDamegeAmount2= 11;\n" +
+            "\n" +
+            "m_FireTime2= 1.5;\n" +
+            "m_FireSubSounds= 'hlclassic/weapons/dbarrel1.wav';\n" +
+            "\n" +
+            "m_ShellOrgX = 17;\n" +
+            "m_ShellOrgY = 7;\n" +
+            "m_ShellOrgZ = -8;\n" +
+            "\n" +
+            "m_ShellDirXMax = -25;\n" +
+            "m_ShellDirXMin = 25;\n" +
+            "m_ShellDirYMax = 60;\n" +
+            "m_ShellDirYMin= 80;\n" +
+            "m_ShellDirZMax= 15;\n" +
+            "m_ShellDirZMin= 25;\n" +
+            "\n" +
+            "IsShotGun= true;\n" +
+            "m_PumpTime= 0.6 ;\n" +
+            "m_InsertTime= 0.1 ;\n" +
+            "m_FinishInsertTime= 0.5 ;\n" +
+            "ShotGunPelletCount  = 4 ;\n" +
+            "vecShotgunDM= Vector ( 0.08716, 0.04362, 0.00  );\n" +
+            "\n" +
+            "PumpSounds= 'hlclassic/weapons/scock1.wav';\n" +
+            "ShotgunFinishSound= 'hlclassic/weapons/scock1.wav';\n" +
+            "ShotgunInsertSound= 'hlclassic/weapons/reload3.wav';\n" +
+            "\n" +
+            "m_PumpTime2= 1 ;\n" +
+            "ShotGunSubPelletCount= 8 ;\n" +
+            "vecShotgunDM2 = Vector ( 0.17365, 0.04362, 0.00 );\n" +
+            "\n" +
+            "g_WeaponModel = {};\n" +
+            "\n" +
+            "g_WeaponSound = {'items/9mmclip1.wav'};\n" +
+            "g_WeaponSprites = {'640hud1.spr',\n" +
+            "'640hud4.spr',\n" +
+            "'640hud7.spr',\n" +
+            "'crosshairs.spr'};\n" +
+            "}\n" +
+            "}\n" +
+            "void RegisterExmShotgun()\n" +
+            "{\n" +
+            "g_CustomEntityFuncs.RegisterCustomEntity( 'weapon_hlshotgun', 'weapon_hlshotgun' );\n" +
+            "g_ItemRegistry.RegisterWeapon( 'weapon_hlshotgun', 'hl_weapons', 'buckshot', '' ,'ammo_buckshot' , '');\n" +
+            "}";
     }
 }
 
