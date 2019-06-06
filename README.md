@@ -7,8 +7,6 @@ A generator for Sven-Coop scripts weapons
 > 
 >                                                        -- GALILEO
 
-# EZAsWeapon
-
 ----
 
 一个简单的Sven-Coop武器模版生成工具
