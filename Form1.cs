@@ -193,7 +193,7 @@ namespace EZAsWeapon
                     case 0: ls = g_WeaponModel; break;
                     case 1: ls = g_WeaponSound; break;
                     case 2: ls = g_WeaponSprites; break;
-                    default:ls = g_WeaponModel; break;
+                    default: ls = g_WeaponModel; break;
                 }
                 ls.Items.Add(textBox53.Text);
                 ListBoxChange(ls);
@@ -216,7 +216,7 @@ namespace EZAsWeapon
                 ls.Items.RemoveAt(ls.SelectedIndex);
                 ListBoxChange(ls);
             }
-                
+
         }
 
         private void Button10_Click(object sender, EventArgs e)
@@ -283,6 +283,7 @@ namespace EZAsWeapon
 
         private void Button6_Click(object sender, EventArgs e)
         {
+            JustReset();
             comboBox10.Text = OpFileBuffer();
         }
 
@@ -298,7 +299,7 @@ namespace EZAsWeapon
             else return textBox2;
         }
 
-        private ListBox LsFindName(string szName )
+        private ListBox LsFindName(string szName)
         {
             if (this.GetType().GetField(szName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.IgnoreCase) != null)
             {
@@ -326,15 +327,15 @@ namespace EZAsWeapon
             }
             else return null;
         }
-        private void ComboBoxOpBuffer(ComboBox cbb,string sz)
+        private void ComboBoxOpBuffer(ComboBox cbb, string sz)
         {
             cbb.SelectedIndex = Utility.Deg2Int(sz);
         }
 
-        private void AnimeOpBuffer(ComboBox cbb,string sz)
+        private void AnimeOpBuffer(ComboBox cbb, string sz)
         {
-            string[] arySz = CDataBaseBuffer.Action().d_DataBase["m_DataEnum"].Replace("{", "").Replace("}", "").Replace(" ","").Replace("=0","").Replace("\n","").Split(',');
-            for (int i = 0 ;i < arySz.Length; i++)
+            string[] arySz = CDataBaseBuffer.Action().d_DataBase["m_DataEnum"].Replace("{", "").Replace("}", "").Replace(" ", "").Replace("=0", "").Replace("\n", "").Split(',');
+            for (int i = 0; i < arySz.Length; i++)
             {
                 if (arySz[i].Trim() == sz)
                     cbb.SelectedIndex = i;
@@ -350,9 +351,9 @@ namespace EZAsWeapon
         {
             lb.Items.Clear();
             string[] aysz = sz.Replace("{", "").Replace("}", "").Split(',');
-            for(int i = 0;i < aysz.Length; i++)
+            for (int i = 0; i < aysz.Length; i++)
             {
-                if(!string.IsNullOrEmpty(aysz[i]))
+                if (!string.IsNullOrEmpty(aysz[i]))
                     lb.Items.Add(aysz[i]);
             }
         }
@@ -374,7 +375,7 @@ namespace EZAsWeapon
                     string s = sr.ReadToEnd();
                     StringSpliter(s);
                     sr.Close();
-                    
+
                     Utility.Dialog("成功！");
                 }
                 else
@@ -521,7 +522,7 @@ namespace EZAsWeapon
             string cache = "		{\n";
             for (int i = 0; i < lb.Items.Count; i++)
             {
-                cache = cache + "		'" + lb.Items[i].ToString().Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", "") + (i == lb.Items.Count - 1 || lb.Items.Count ==0 ? "'\n" : "',\n");
+                cache = cache + "		'" + lb.Items[i].ToString().Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", "") + (i == lb.Items.Count - 1 || lb.Items.Count == 0 ? "'\n" : "',\n");
             }
             cache = cache + "		}";
             Utility.SaveBuffer(lb.Name, cache);
@@ -535,10 +536,10 @@ namespace EZAsWeapon
         private void MDlTextChange(object sender, EventArgs e)
         {
             TextBox bu = (TextBox)sender;
-            TextChange(bu,true);
+            TextChange(bu, true);
         }
 
-        private void TextChange(TextBox tb,bool md = false)
+        private void TextChange(TextBox tb, bool md = false)
         {
             if (!string.IsNullOrEmpty(tb.Text))
                 Utility.SaveBuffer(tb.Name, md ? "models/" + tb.Text : tb.Text);
@@ -580,9 +581,9 @@ namespace EZAsWeapon
         private string[] ExportFileBuffer()
         {
             string[] arycache = CDataBaseBuffer.Action().d_DataBase.Keys.ToArray();
-            for (int i = 0; i < CDataBaseBuffer.Action().d_DataBase.Count - 1;i++)
+            for (int i = 0; i < CDataBaseBuffer.Action().d_DataBase.Count - 1; i++)
             {
-                CDataBaseBuffer.Action().d_DataBase[arycache[i]].Replace("\n", "").Replace("\r","");
+                CDataBaseBuffer.Action().d_DataBase[arycache[i]].Replace("\n", "").Replace("\r", "");
             }
             //文件头
             string[] cache =
@@ -671,8 +672,8 @@ namespace EZAsWeapon
                      "		m_YPunchMax 		= " , CDataBaseBuffer.Action().d_DataBase["m_YPunchMax"] , ";\n" ,
                      "		m_YPunchMin 		= " , CDataBaseBuffer.Action().d_DataBase["m_YPunchMin"] , ";\n" ,
                      "\n" ,
-                     "		m_iAcc 				= " , CDataBaseBuffer.Action().d_DataBase["m_iAcc"] , ";\n" ,
-                     "		m_iAcc2 			= " , CDataBaseBuffer.Action().d_DataBase["m_iAcc2"] , ";\n" ,
+                     "		m_iAcc 				= " , Utility.Str2Degree(CDataBaseBuffer.Action().d_DataBase["m_iAcc"]) , ";\n" ,
+                     "		m_iAcc2 			= " , Utility.Str2Degree(CDataBaseBuffer.Action().d_DataBase["m_iAcc2"]) , ";\n" ,
                      "\n" ,
                      "		m_iDamegeAmount2 	= " , CDataBaseBuffer.Action().d_DataBase["m_iDamegeAmount2"] , ";\n" ,
                      "		m_FireTime2 		= " , CDataBaseBuffer.Action().d_DataBase["m_FireTime2"] , ";\n" ,
@@ -729,7 +730,7 @@ namespace EZAsWeapon
             string[] arykey = CDataBaseBuffer.Action().d_DataBase.Keys.ToArray();
             for (int i = 0; i < arykey.Length; i++)
             {
-                if(this.GetType().GetField(arykey[i], System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.IgnoreCase) != null)
+                if (this.GetType().GetField(arykey[i], System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.IgnoreCase) != null)
                 {
                     object obj = this.GetType().GetField(arykey[i], System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.IgnoreCase).GetValue(this);
                     if (obj.GetType() == typeof(TextBox))
@@ -759,12 +760,12 @@ namespace EZAsWeapon
                         else
                             ListBoxChange(lb);
                     }
-                        
+
                     else if (obj.GetType() == typeof(ComboBox))
                         ComBoxChange((ComboBox)obj);
                 }
             }
-            for(int j=1;j<arykey.Length - 5;j++)
+            for (int j = 1; j < arykey.Length - 5; j++)
             {
                 CDataBaseBuffer.Action().d_DataBase[arykey[j]] = CDataBaseBuffer.Action().d_DataBase[arykey[j]].Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", "");
             }
@@ -784,6 +785,7 @@ namespace EZAsWeapon
 
         private void Hlmp5ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            JustReset();
             Utility.Dialog("打开示例：hlmp5....");
             StringSpliter(OpenDefaultData.Exm9mm);
         }
@@ -797,8 +799,31 @@ namespace EZAsWeapon
 
         private void HlshotgunToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            JustReset();
             Utility.Dialog("打开示例：hlshotgun....");
             StringSpliter(OpenDefaultData.ExmShotGun);
+        }
+
+        private void JustReset()
+        {
+            string[] arykey = CDataBaseBuffer.Action().d_DataBase.Keys.ToArray();
+            for (int i = 0; i < arykey.Length; i++)
+            {
+                if (this.GetType().GetField(arykey[i], System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.IgnoreCase) != null)
+                {
+                    object obj = this.GetType().GetField(arykey[i], System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.IgnoreCase).GetValue(this);
+                    if (obj.GetType() == typeof(TextBox))
+                        ((TextBox)obj).Text = "";
+                    else if (obj.GetType() == typeof(CheckBox))
+                        ((CheckBox)obj).Checked = false;
+                    else if (obj.GetType() == typeof(ListBox))
+                        ((ListBox)obj).Items.Clear();
+                }
+            }
+            for (int j = 0; j < arykey.Length; j++)
+            {
+                CDataBaseBuffer.Action().d_DataBase[arykey[j]] = "0";
+            }
         }
     }
 }

@@ -163,8 +163,8 @@ namespace EZAsWeapon
             listView1.Items.Add(new ListViewItem(new string[] { "", "Exm9mm", "weapon_example_9mm" }));
             listView1.Items.Add(new ListViewItem(new string[] { "", "ExmShotgun", "weapon_example_shotgun" }));
             RowTheList();
-            textBox3.Text = "EzWeaapons";
-            textBox4.Text = "EzWeaapons";
+            textBox3.Text = "EzWeapons";
+            textBox4.Text = "EzWeapons";
         }
     }
 }
