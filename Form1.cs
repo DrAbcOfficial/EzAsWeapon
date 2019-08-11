@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace EZAsWeapon
@@ -135,7 +134,7 @@ namespace EZAsWeapon
         private void Form1_Load(object sender, EventArgs e)
         {
             listBox5.DataSource = Utility.OutDialog;
-            Utility.Dialog("待命");
+            Utility.Dialog(OpenDefaultData.Lang == "CN" ? "待命" : "Ready");
             tabPage3.Enabled = false;
         }
 
@@ -143,7 +142,10 @@ namespace EZAsWeapon
         {
             if (IsZoomMode.Checked && IsSubProj.Checked)
             {
-                MessageBox.Show("开镜与右键投射物不兼容！", "错误操作！", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                if (OpenDefaultData.Lang == "CN")
+                    MessageBox.Show("开镜与右键投射物不兼容！", "错误操作！", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                else if (OpenDefaultData.Lang == "EN")
+                    MessageBox.Show("Zoom is not compatible with right-click projector!", "Error！", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 IsZoomMode.Checked = false;
             }
             else
@@ -155,7 +157,10 @@ namespace EZAsWeapon
         {
             if (IsShotGun.Checked && IsProj.Checked)
             {
-                MessageBox.Show("霰弹枪与左键投射物不兼容！", "错误操作！", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                if (OpenDefaultData.Lang == "CN")
+                    MessageBox.Show("霰弹枪与左键投射物不兼容！", "错误操作！", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                else if (OpenDefaultData.Lang == "CN")
+                    MessageBox.Show("Shotgun is not compatible with proj！", "Error！", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 IsProj.Checked = false;
             }
             else
@@ -167,7 +172,10 @@ namespace EZAsWeapon
         {
             if (IsZoomMode.Checked && IsSubProj.Checked)
             {
-                MessageBox.Show("开镜与右键投射物不兼容！", "错误操作！", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                if (OpenDefaultData.Lang == "CN")
+                    MessageBox.Show("开镜与右键投射物不兼容！", "错误操作！", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                else if (OpenDefaultData.Lang == "CN")
+                    MessageBox.Show("Zoom  is not compatible with proj!", "Error！", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 IsSubProj.Checked = false;
             }
             else
@@ -178,9 +186,9 @@ namespace EZAsWeapon
         private void Button8_Click(object sender, EventArgs e)
         {
             Form2 form2 = new Form2();
-            Utility.Dialog("尝试打开窗口...");
+            Utility.Dialog(OpenDefaultData.Lang == "CN" ? "尝试打开窗口..." : "Try to open window");
             form2.ShowDialog();
-            Utility.Dialog("成功！");
+            Utility.Dialog(OpenDefaultData.Lang == "CN" ? "成功！" : "Success");
         }
 
         private void Button12_Click(object sender, EventArgs e)
@@ -267,7 +275,7 @@ namespace EZAsWeapon
 
         private void 生成baseweaponasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Utility.Dialog("尝试输出文件...");
+            Utility.Dialog(OpenDefaultData.Lang == "CN" ? "尝试输出文件..." : "exporting");
             Form3 form3 = new Form3();
             form3.SubFilePath = comboBox10.Text;
             form3.Content = OpenDefaultData.baseweapon;
@@ -276,7 +284,7 @@ namespace EZAsWeapon
 
         private void 退出程序ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Utility.Dialog("退出中...");
+            Utility.Dialog(OpenDefaultData.Lang == "CN" ? "退出中..." : "Exiting");
             this.Hide();
             this.Dispose();
         }
@@ -361,7 +369,7 @@ namespace EZAsWeapon
         private string OpFileBuffer()
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            Utility.Dialog("尝试打开文件...");
+            Utility.Dialog(OpenDefaultData.Lang == "CN" ? "尝试打开文件..." : "opening");
             ofd.Filter = "Sven-Coop 脚本（*.as）|*.as";
             ofd.FilterIndex = 1;
             ofd.RestoreDirectory = true;
@@ -376,16 +384,16 @@ namespace EZAsWeapon
                     StringSpliter(s);
                     sr.Close();
 
-                    Utility.Dialog("成功！");
+                    Utility.Dialog(OpenDefaultData.Lang == "CN" ? "成功" : "Success");
                 }
                 else
                 {
-                    Utility.Dialog("没有选择正确类型的文件...");
+                    Utility.Dialog(OpenDefaultData.Lang == "CN" ? "没有选择正确类型的文件..." : "Not right file");
                     return null;
                 }
             }
             else
-                Utility.Dialog("被中断！");
+                Utility.Dialog(OpenDefaultData.Lang == "CN" ? "被中断！" : "breaked!");
             return ofd.FileName;
         }
 
@@ -769,7 +777,7 @@ namespace EZAsWeapon
             {
                 CDataBaseBuffer.Action().d_DataBase[arykey[j]] = CDataBaseBuffer.Action().d_DataBase[arykey[j]].Replace("\n", "").Replace(" ", "").Replace("\t", "").Replace("\r", "");
             }
-            Utility.Dialog("尝试输出文件...");
+            Utility.Dialog(OpenDefaultData.Lang == "CN" ? "尝试输出文件..." : "Exporting");
             Form3 form3 = new Form3();
             form3.SubFilePath = comboBox10.Text;
             form3.Content = ExportFileBuffer();
@@ -778,7 +786,7 @@ namespace EZAsWeapon
 
         private void 关于ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Utility.Dialog("打开关于界面....");
+            Utility.Dialog(OpenDefaultData.Lang == "CN" ? "打开关于界面...." : "Opening about");
             Form4 form4 = new Form4();
             form4.ShowDialog();
         }
@@ -786,13 +794,13 @@ namespace EZAsWeapon
         private void Hlmp5ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             JustReset();
-            Utility.Dialog("打开示例：hlmp5....");
+            Utility.Dialog(OpenDefaultData.Lang == "CN" ? "打开示例：hlmp5...." : "Opening hlmp5");
             StringSpliter(OpenDefaultData.Exm9mm);
         }
 
         private void ToolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            Utility.Dialog("启动Register管理器...");
+            Utility.Dialog(OpenDefaultData.Lang == "CN" ? "启动Register管理器..." : "Opening register manager");
             Form5 from5 = new Form5();
             from5.Show();
         }
@@ -800,7 +808,7 @@ namespace EZAsWeapon
         private void HlshotgunToolStripMenuItem_Click(object sender, EventArgs e)
         {
             JustReset();
-            Utility.Dialog("打开示例：hlshotgun....");
+            Utility.Dialog(OpenDefaultData.Lang == "CN" ? "打开示例：hlshotgun...." : "Opening hlshotgun");
             StringSpliter(OpenDefaultData.ExmShotGun);
         }
 
@@ -824,6 +832,243 @@ namespace EZAsWeapon
             {
                 CDataBaseBuffer.Action().d_DataBase[arykey[j]] = "0";
             }
+        }
+
+        private void 中文ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenDefaultData.Lang = "CN";
+            label1.Text = "动作名称";
+            groupBox1.Text = "模型动作顺序";
+            button4.Text = "下移数据";
+            button3.Text = "上移数据";
+            label25.Text = "结束换弹";
+            label24.Text = "插入子弹";
+            label23.Text = "开始换弹";
+            label7.Text = "换弹动作";
+            label6.Text = "右键开火";
+            label5.Text = "射击动作";
+            label4.Text = "抽出动作";
+            label3.Text = "一般动作二";
+            label2.Text = "一般动作";
+            button2.Text = "删除动作";
+            button1.Text = "添加动作";
+            button8.Text = "霰弹枪";
+            groupBox2.Text = "资源名称";
+            label15.Text = "持枪动作";
+            label14.Text = "Spr的TXT";
+            label63.Text = "TXT所在文件夹  sprites/";
+            label13.Text = "开火声音";
+            label12.Text = "无子弹开火声音";
+            label11.Text = "弹壳名称 models/";
+            label10.Text = "W模名称  models/";
+            label9.Text = "P模名称  models/";
+            label8.Text = "V模名称  models/";
+            label50.Text = "开火消耗子弹";
+            label42.Text = "威力";
+            label41.Text = "重量";
+            label40.Text = "选单位置";
+            label39.Text = "菜单位置";
+            label21.Text = "丢弃子弹数量";
+            label20.Text = "最大弹匣";
+            label18.Text = "最大子弹";
+            label16.Text = "默认给予子弹";
+            IsShotGun.Text = "是霰弹枪吗？";
+            IsSubProj.Text = "右键是投射物吗？";
+            IsProj.Text = "左键是投射物吗？";
+            IsZoomMode.Text = "是否可以开镜";
+            IsSecAmmo.Text = "使用次要子弹吗？";
+            IsSecFire.Text = "右键可以开火吗？";
+            groupBox4.Text = "开镜管理";
+            label28.Text = "开镜音效";
+            label27.Text = "开镜FOV";
+            label26.Text = "开镜移动速度";
+            label33.Text = "Z";
+            label32.Text = "Y";
+            label29.Text = "投射偏移  X";
+            label30.Text = "投射物速度";
+            label31.Text = "投射物类型";
+            label34.Text = "Z";
+            label35.Text = "Y";
+            label36.Text = "投射偏移  X";
+            label37.Text = "投射物速度";
+            label38.Text = "投射物类型";
+            groupBox7.Text = "选择题";
+            groupBox9.Text = "输出窗口";
+            button7.Text = "输出";
+            button5.Text = "输出位置";
+            button6.Text = "打开文件";
+            tabPage1.Text = "主要数据";
+            label61.Text = "武器注册名称";
+            label60.Text = "武器实体名称 weapon_";
+            tabPage2.Text = "主要数据2";
+            label65.Text = "丢弃子弹实体";
+            label64.Text = "所用子弹名称";
+            label56.Text = "主要精准度";
+            label43.Text = "横轴最小后座";
+            label44.Text = "横轴最大后座";
+            label45.Text = "竖轴最小后座";
+            label46.Text = "竖轴最大后座";
+            label47.Text = "换弹时间";
+            label48.Text = "开火间隔";
+            label49.Text = "布置时间";
+            tabPage3.Text = "右键数据";
+            label66.Text = "丢弃子弹实体";
+            label67.Text = "所用子弹名称";
+            label17.Text = "默认给予子弹";
+            label55.Text = "精度";
+            label22.Text = "丢弃子弹数量";
+            label53.Text = "开火间隔";
+            label52.Text = "开火伤害";
+            label54.Text = "次要开火声音";
+            label19.Text = "最大子弹";
+            label51.Text = "开火消耗子弹";
+            groupBox3.Text = "弹壳数据";
+            label62.Text = "最小出速";
+            label59.Text = "最大出速";
+            label58.Text = "弹出点";
+            label57.Text = "X     Y     Z";
+            tabPage4.Text = "左键投射物";
+            tabPage5.Text = "右键投射物";
+            tabPage6.Text = "其他模型";
+            tabPage7.Text = "其他音效";
+            tabPage8.Text = "SPR路径";
+            button12.Text = "添加";
+            button9.Text = "删除";
+            button10.Text = "上移";
+            button11.Text = "下移";
+            menuStrip1.Text = "menuStrip1";
+            生成baseweaponsasToolStripMenuItem.Text = "菜单";
+            生成baseweaponasToolStripMenuItem.Text = "生成baseweapon.as";
+            toolStripMenuItem2.Text = "打开示例";
+            hlmp5ToolStripMenuItem.Text = "hlmp5";
+            hlshotgunToolStripMenuItem.Text = "hlshotgun";
+            toolStripMenuItem1.Text = "清除输出log";
+            toolStripMenuItem3.Text = "启动Register管理器";
+            退出程序ToolStripMenuItem.Text = "退出程序";
+            关于ToolStripMenuItem.Text = "关于";
+            语言ToolStripMenuItem.Text = "语言";
+            中文ToolStripMenuItem.Text = "中文";
+            englishToolStripMenuItem.Text = "English";
+            关于ToolStripMenuItem1.Text = "关于";
+            //Form1
+        }
+
+        private void EnglishToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenDefaultData.Lang = "EN";
+            label1.Text = "Ani-name";
+            groupBox1.Text = "Animation seq";
+            button4.Text = "Downward";
+            button3.Text = "Upward";
+            label25.Text = "Finish reload";
+            label24.Text = "Insert bullet";
+            label23.Text = "Start reload";
+            label7.Text = "Reload";
+            label6.Text = "Sec fire";
+            label5.Text = "Fire";
+            label4.Text = "Draw";
+            label3.Text = "Idle 2";
+            label2.Text = "Idle";
+            button2.Text = "Delete";
+            button1.Text = "Add";
+            button8.Text = "Shotgun";
+            groupBox2.Text = "Resource";
+            label15.Text = "Hold Action";
+            label14.Text = "Txt for spr";
+            label63.Text = "Txt folder  sprites/";
+            label13.Text = "Fire sound";
+            label12.Text = "Dry fire sound";
+            label11.Text = "Shell   models/";
+            label10.Text = "W model  models/";
+            label9.Text = "P model  models/";
+            label8.Text = "V model  models/";
+            label50.Text = "Fire consume";
+            label42.Text = "Damage";
+            label41.Text = "Weight";
+            label40.Text = "Position";
+            label39.Text = "Slot";
+            label21.Text = "Drop amount";
+            label20.Text = "Max clip";
+            label18.Text = "Max carry";
+            label16.Text = "Default carry";
+            IsShotGun.Text = "Is shotgun?";
+            IsSubProj.Text = "Sec fire projectile?";
+            IsProj.Text = "Fire projectile?";
+            IsZoomMode.Text = "Can zoom？";
+            IsSecAmmo.Text = "Use sec ammo?";
+            IsSecFire.Text = "Can sec fire?";
+            groupBox4.Text = "Zoom manager";
+            label28.Text = "Zoom sound";
+            label27.Text = "Zoom FOV";
+            label26.Text = "Move speed";
+            label33.Text = "Z";
+            label32.Text = "Y";
+            label29.Text = "Proj      X";
+            label30.Text = "Speed";
+            label31.Text = "Type";
+            label34.Text = "Z";
+            label35.Text = "Y";
+            label36.Text = "Proj      X";
+            label37.Text = "Speed";
+            label38.Text = "Type";
+            groupBox7.Text = "Choose one";
+            groupBox9.Text = "Output";
+            button7.Text = "Export";
+            button5.Text = "Export location";
+            button6.Text = "Open";
+            tabPage1.Text = "Main data";
+            label61.Text = "Registe name";
+            label60.Text = "Entity name weapon_";
+            tabPage2.Text = "Main data 2";
+            label65.Text = "Ammo entity";
+            label64.Text = "Ammo name";
+            label56.Text = "Accurancy";
+            label43.Text = "Min h-punch";
+            label44.Text = "Max h-punch";
+            label45.Text = "Min v-punch";
+            label46.Text = "Max v-punch";
+            label47.Text = "Reload time";
+            label48.Text = "Fire interval";
+            label49.Text = "Deploy time";
+            tabPage3.Text = "Sec data";
+            label66.Text = "Ammo entity";
+            label67.Text = "Ammo name";
+            label17.Text = "Default carry";
+            label55.Text = "Accurancy";
+            label22.Text = "Drop amount";
+            label53.Text = "Fire interval";
+            label52.Text = "Damage";
+            label54.Text = "Sec fire sound";
+            label19.Text = "Max carry";
+            label51.Text = "Fire consume";
+            groupBox3.Text = "Shell data";
+            label62.Text = "Min speed";
+            label59.Text = "Max speed";
+            label58.Text = "Position";
+            label57.Text = "X     Y     Z";
+            tabPage4.Text = "Main projectile";
+            tabPage5.Text = "Sec projectile";
+            tabPage6.Text = "Other models";
+            tabPage7.Text = "Other sounds";
+            tabPage8.Text = "Spr location";
+            button12.Text = "Add";
+            button9.Text = "Del";
+            button10.Text = "Up";
+            button11.Text = "Down";
+            menuStrip1.Text = "menuStrip1";
+            生成baseweaponsasToolStripMenuItem.Text = "Menu";
+            生成baseweaponasToolStripMenuItem.Text = "Genarate baseweapon.as";
+            toolStripMenuItem2.Text = "Example";
+            hlmp5ToolStripMenuItem.Text = "hlmp5";
+            hlshotgunToolStripMenuItem.Text = "hlshotgun";
+            toolStripMenuItem1.Text = "Clear out log";
+            toolStripMenuItem3.Text = "Register Manager";
+            退出程序ToolStripMenuItem.Text = "Exit";
+            关于ToolStripMenuItem.Text = "About";
+            语言ToolStripMenuItem.Text = "Language";
+            中文ToolStripMenuItem.Text = "中文";
+            englishToolStripMenuItem.Text = "English";
+            关于ToolStripMenuItem1.Text = "About";
         }
     }
 }

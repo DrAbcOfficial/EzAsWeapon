@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Text;
 using System.ComponentModel;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace EZAsWeapon
@@ -28,7 +28,7 @@ namespace EZAsWeapon
 
         public static void ClearDIalog()
         {
-            while(Utility.OutDialog.Count != 0)
+            while (Utility.OutDialog.Count != 0)
             {
                 Utility.OutDialog.RemoveAt(0);
             }
@@ -44,9 +44,9 @@ namespace EZAsWeapon
         }
         public static void Dialog(string sz)
         {
-            Utility.OutDialog.Add(DateTime.Now.ToString() + " | " +  sz + "." );
+            Utility.OutDialog.Add(DateTime.Now.ToString() + " | " + sz + ".");
         }
-        public static string Bool2Str (bool bo)
+        public static string Bool2Str(bool bo)
         {
             if (bo)
                 return "true";
@@ -54,12 +54,12 @@ namespace EZAsWeapon
                 return "false";
         }
 
-        public static bool Str2Bool (string sz)
+        public static bool Str2Bool(string sz)
         {
             string cache = sz.Trim().ToLower();
             if (cache == "true" || cache == "1")
                 return true;
-            else if(cache == "false" || cache == "0")
+            else if (cache == "false" || cache == "0")
                 return false;
             else
             {
@@ -75,7 +75,7 @@ namespace EZAsWeapon
 
         public static int Deg2Int(string Deg)
         {
-            return Deg == "g_vecZero" ? 0 : Convert.ToInt16( Deg.Replace("VECTOR_CONE_", "").Replace("DEGREES", ""));
+            return Deg == "g_vecZero" ? 0 : Convert.ToInt16(Deg.Replace("VECTOR_CONE_", "").Replace("DEGREES", ""));
         }
 
         public static string Str2Vec(string x, string y, string z)
@@ -95,7 +95,7 @@ namespace EZAsWeapon
 
         public static bool IsFloat(TextBox Box)
         {
-            if(string.IsNullOrEmpty(Box.Text))
+            if (string.IsNullOrEmpty(Box.Text))
                 return true;
             try
             {
@@ -131,7 +131,7 @@ namespace EZAsWeapon
 
         public static bool IsPos(TextBox Box)
         {
-            if(Box.Text.IndexOf('-') == 0)
+            if (Box.Text.IndexOf('-') == 0)
             {
                 Box.Text = null;
                 MessageBox.Show("该项只可填写正数！", "填写错误！！", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -171,13 +171,13 @@ namespace EZAsWeapon
                 localFilePath = sfd.FileName.ToString();
                 Utility.ComboDialog.Add(localFilePath);
                 Utility.Dialog("成功！");
-            } 
+            }
             else
                 Utility.Dialog("被中断！");
             return localFilePath;
         }
 
-        public static void SaveFileBuffer(string path,string content)
+        public static void SaveFileBuffer(string path, string content)
         {
             try
             {

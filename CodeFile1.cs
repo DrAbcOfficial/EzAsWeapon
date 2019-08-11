@@ -2,6 +2,8 @@
 {
     public static class OpenDefaultData
     {
+        public static string Lang = "CN";
+
         public static string[] baseweapon = {
             "/**===========================================================================\n",
             "  							本脚本由EzAsWeapon程序自动生成\n" ,

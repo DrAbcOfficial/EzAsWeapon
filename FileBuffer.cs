@@ -14,7 +14,7 @@ namespace EZAsWeapon
         public Dictionary<string, string> d_DataBase
         {
             get { return g_DataBase.d_DataBase; }
-            set { g_DataBase.d_DataBase = value;}
+            set { g_DataBase.d_DataBase = value; }
         }
     }
 

@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EZAsWeapon
@@ -19,15 +13,61 @@ namespace EZAsWeapon
             InitializeComponent();
         }
 
+        void LangEN()
+        {
+            this.label1.Text = "Save location";
+            this.label2.Text = "Scripts location";
+            this.groupBox1.Text = "Weapons list";
+            this.button2.Text = "Del";
+            this.button1.Text = "Add";
+            this.columnHeader3.Text = "UID";
+            this.columnHeader1.Text = "Registe name";
+            this.columnHeader2.Text = "File name(without.as)";
+            this.button4.Text = "Export";
+            this.button5.Text = "Import";
+            this.label3.Text = "scripts/custom_weapons/";
+            this.label4.Text = "scripts/plugins/";
+            this.button3.Text = "Example";
+            this.Text = "Register Manager";
+        }
+
+        void LangCN()
+        {
+            this.label1.Text = "Register保存位置";
+            this.label2.Text = "脚本储存位置";
+            this.groupBox1.Text = "武器列表";
+            this.button2.Text = "删除";
+            this.button1.Text = "添加";
+            this.columnHeader3.Text = "序号";
+            this.columnHeader1.Text = "注册名";
+            this.columnHeader2.Text = "文件名(无.as)";
+            this.button4.Text = "输出文件";
+            this.button5.Text = "读取文件";
+            this.label3.Text = "scripts/custom_weapons/";
+            this.label4.Text = "scripts/plugins/";
+            this.button3.Text = "生成示例";
+            this.Text = "Register管理器";
+
+        }
+
         private void Form5_Load(object sender, EventArgs e)
         {
-            toolTip1.SetToolTip(textBox3, "填写baseweapon.as和\n其他生成武器所在的文件夹");
-            toolTip2.SetToolTip(textBox4, "填写register.as和所在的文件夹");
+            switch (OpenDefaultData.Lang)
+            {
+                case "CN":
+                    LangCN();
+                    toolTip1.SetToolTip(textBox3, "填写baseweapon.as和\n其他生成武器所在的文件夹");
+                    toolTip2.SetToolTip(textBox4, "填写register.as和所在的文件夹"); break;
+                case "EN":
+                    LangEN(); toolTip1.SetToolTip(textBox3, "Fill in the folders where baseweapon.as\nand other generated weapons are located");
+                    toolTip2.SetToolTip(textBox4, "Fill in register. as and the folder you are in"); break;
+                default: LangCN(); break;
+            }
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(textBox1.Text) && !string.IsNullOrEmpty(textBox2.Text))
+            if (!string.IsNullOrEmpty(textBox1.Text) && !string.IsNullOrEmpty(textBox2.Text))
             {
                 listView1.Items.Add(new ListViewItem(new string[] { "", textBox2.Text, textBox1.Text }));
                 textBox1.Text = textBox2.Text = "";
@@ -57,14 +97,14 @@ namespace EZAsWeapon
         {
             string szFilePath = string.IsNullOrEmpty(textBox4.Text) ? "" : "../";
             Regex rege = new Regex("/", RegexOptions.Compiled);
-            for (int i =0;i< rege.Matches(textBox4.Text).Count;i++)
+            for (int i = 0; i < rege.Matches(textBox4.Text).Count; i++)
             {
                 szFilePath = szFilePath + "../";
             }
             szExpres.Add("#include '../" + szFilePath + "custom_weapons/" + textBox3.Text + "/baseweapon'\n\n");
             for (int i = 0; i < listView1.Items.Count; i++)
             {
-                szExpres.Add("#include '../" + szFilePath + "custom_weapons/" + textBox3.Text + "/" + listView1.Items[i].SubItems[2].ToString().Replace("ListViewSubItem: {", "").Replace("}","") + "'\n");
+                szExpres.Add("#include '../" + szFilePath + "custom_weapons/" + textBox3.Text + "/" + listView1.Items[i].SubItems[2].ToString().Replace("ListViewSubItem: {", "").Replace("}", "") + "'\n");
             }
 
             szExpres.Add("void PluginInit()\n");
@@ -97,7 +137,7 @@ namespace EZAsWeapon
 
         private string CleanerHelper(in string szDirty)
         {
-           return szDirty.Replace(" ", "").Replace(";", "").Replace("'", "").Replace("\t", "").Replace(".", "").Replace("/", "");
+            return szDirty.Replace(" ", "").Replace(";", "").Replace("'", "").Replace("\t", "").Replace(".", "").Replace("/", "");
         }
         private void Button5_Click(object sender, EventArgs e)
         {
@@ -132,7 +172,7 @@ namespace EZAsWeapon
                         }
                         else if (line.IndexOf("voidMapInit()") != -1)
                         {
-                            int j = i +2;
+                            int j = i + 2;
                             while (temp[j].IndexOf("Register") != -1)
                             {
                                 sz2.Add(CleanerHelper(temp[j]).Replace("(", "").Replace(")", "").Replace("Register", ""));
